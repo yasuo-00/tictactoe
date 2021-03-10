@@ -1,8 +1,8 @@
 import pygame as pg
 import sys
 import numpy as np
-from graphics import initialize_board, draw_figures
-from controllers import movement_controller
+from graphics import initialize_board, draw_figures, draw_lines
+from controllers import movement_controller, winner_controller
 
 
 
@@ -36,6 +36,11 @@ def initialize(width, height, board_size, bg_color, line_color, line_width):
 
                 if(movement_controller.is_square_available(board, clicked_row, clicked_col)):
                     movement_controller.mark_square(board, clicked_row, clicked_col, is_player_one)
+                    winner = winner_controller.check_win(board)
+                    if(winner!=0):
+                        print("Winner")
+                        game_over=True
+
                     is_player_one= not is_player_one
                     
                     draw_figures.draw_figures(screen, board, space_between_columns, space_between_lines, (0,0,0), (255,255,255))
@@ -47,13 +52,16 @@ def initialize(width, height, board_size, bg_color, line_color, line_width):
                                                 space_between_lines, line_width)
                     board = restart_board(board)
                     is_player_one = True
+                    game_over=False
         pg.display.update()
 
+#restart screen with initial screen
 def restart_screen(width, height, bg_color,board_size, line_color, space_between_columns, space_between_lines, line_width):
     screen = initialize_board.initialize_board(width, height, bg_color,
                                                 board_size, line_color, space_between_columns,
                                                 space_between_lines, line_width)
     return screen
 
+#overwrite board with 0 (empty)
 def restart_board(board):
     return np.zeros((len(board), len(board)))
