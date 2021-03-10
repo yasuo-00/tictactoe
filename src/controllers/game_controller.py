@@ -4,7 +4,8 @@ import numpy as np
 from graphics import initialize_board, draw_figures, draw_lines
 from controllers import movement_controller, winner_controller
 
-
+PLAYER_ONE_COLOR=(255,255,255)
+PLAYER_TWO_COLOR=(0,0,0)
 
 def initialize(width, height, board_size, bg_color, line_color, line_width):
     space_between_lines=height/board_size
@@ -28,6 +29,8 @@ def initialize(width, height, board_size, bg_color, line_color, line_width):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 sys.exit()
+    
+            # read move while game is not over
             if event.type == pg.MOUSEBUTTONDOWN and not game_over:
                 #get x,y position of mouse when it clicks
                 #and transform into correspondent matrix position
@@ -38,6 +41,10 @@ def initialize(width, height, board_size, bg_color, line_color, line_width):
                     movement_controller.mark_square(board, clicked_row, clicked_col, is_player_one)
                     winner = winner_controller.check_win(board)
                     if(winner!=0):
+                        if(is_player_one):
+                            draw_lines.draw_winner_line(screen, winner, is_player_one, board_size, height, width, space_between_lines, space_between_columns, (clicked_row, clicked_col), line_width, PLAYER_ONE_COLOR)
+                        else:
+                            draw_lines.draw_winner_line(screen, winner, is_player_one, board_size, height, width, space_between_lines, space_between_columns, (clicked_row, clicked_col), line_width, PLAYER_TWO_COLOR)
                         print("Winner")
                         game_over=True
 
