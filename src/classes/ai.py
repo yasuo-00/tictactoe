@@ -8,7 +8,10 @@ class AI ():
     
 
     def make_move(self, board_size):
-        return self.__random_move(board_size)
+        if self.__isRandom:
+            return self.__random_move(board_size)
+        else:
+            return self.__random_move(board_size)
 
 
 

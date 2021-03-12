@@ -10,8 +10,17 @@ class Board():
         self.__board[pos[0]][pos[1]]= 1 if is_player_one else -1
 
     def is_square_available(self, pos):
+        if(pos[0]<0):
+            return False
         # if position on board == 0 then it's available
         return self.__board[pos[0]][pos[1]] == 0
+
+    def is_full(self):
+        for row in self.__board:
+            for e in row:
+                if e==0:
+                    return False
+        return True
 
     def clear(self):
         self.__board=np.zeros((self.__size, self.__size))
