@@ -32,12 +32,13 @@ class Painter():
         return self.__screen_width
 
     @property
+    def screen(self):
+        return self.__screen
+
+    @screen.setter
     def screen(self, screen):
         self.__screen = screen
 
-    @property
-    def screen(self):
-        return self.__screen
 
     
 #-----------------PUBLIC METHODS-------------------------
@@ -64,7 +65,7 @@ class Painter():
             elif(win_condition ==2):
                 self.__draw_vertical_line( clicked_pos[1], space_between_columns, color)
             else:
-                self.__draw_diagonal_line(board_size, clicked_pos, color)
+                self.__draw_diagonal_line(board_size, win_condition, color)
 
 
 #---------------PRIVATE METHODS-------------------------
@@ -118,9 +119,9 @@ class Painter():
         pg.draw.line(self.__screen, color, (board_column*space_between_columns+(space_between_columns//2),0), (board_column*space_between_columns+(space_between_columns//2), self.__screen_height), self.__line_width)
 
     #draw diagonal line across board
-    def __draw_diagonal_line(self, board_size, clicked_cell_pos, color):
+    def __draw_diagonal_line(self, board_size, win_condition, color):
         #check if it's to draw primary or secondary diagonal
-        if(clicked_cell_pos==(0,0) or clicked_cell_pos==(board_size-1, board_size-1)):
+        if win_condition==3:
             pg.draw.line(self.__screen, color,(0,0), (self.__screen_height, self.__screen_width), self.__line_width)
         else:
             pg.draw.line(self.__screen, color,(0,self.__screen_width), (self.__screen_height, 0), self.__line_width)

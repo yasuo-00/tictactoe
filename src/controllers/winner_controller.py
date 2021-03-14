@@ -28,7 +28,9 @@ def check_win(board):
         return 2  # "Vertical Win"
 
     # check if either diagonals has the winner sum (size of the board or size of the board * -1)
-    if((prim_diag_sum == board.size or prim_diag_sum == (board.size*-1)) or (sec_diag_sum == board.size or sec_diag_sum == (board.size*-1))):
+    if(prim_diag_sum == board.size) or (prim_diag_sum == (board.size*-1)): 
         return 3  # "Diagonal Win"
 
+    if (sec_diag_sum == board.size )or (sec_diag_sum == (board.size*-1)):
+        return 4
     return 0
