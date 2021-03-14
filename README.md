@@ -1,5 +1,6 @@
 # Tic Tac Toe
 Simple tic tac toe game made in Python
+Minimax with Alpha-Beta Pruning implementation for computer AI
 
 # Dependencies<br/>
 -Numpy<br/>
