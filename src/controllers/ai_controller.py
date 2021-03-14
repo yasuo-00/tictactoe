@@ -35,36 +35,36 @@ def minimax(board, is_max_player, depth, alpha=-sys.maxsize, beta=sys.maxsize, m
         return 0, move
 
     if is_max_player:
-        maxEval = -sys.maxsize
+        max_score = -sys.maxsize
         for i in range(board.size):
             for j in range(board.size):
                 if board.is_square_available((i, j)):
                     board.mark_square((i, j), True)
-                    eval,_ = minimax(board, False, depth + 1, alpha, beta)
+                    score,_ = minimax(board, False, depth + 1, alpha, beta)
                     board.clear_square((i, j))
 
-                    if eval > maxEval:
-                        maxEval = eval
-                        alpha = eval
+                    if score > max_score:
+                        max_score = score
+                        alpha = score
                         move = (i, j)
                     if alpha >= beta:
                         break
-        return maxEval, move
+        return max_score, move
 
     else:
-        minEval = sys.maxsize
+        min_score = sys.maxsize
         for i in range(board.size):
             for j in range(board.size):
                 if board.is_square_available((i, j)):
                     board.mark_square((i, j), False)
-                    eval,_ = minimax(board, True, depth + 1, alpha, beta)
+                    score,_ = minimax(board, True, depth + 1, alpha, beta)
                     board.clear_square((i, j))
 
-                    if eval < minEval:
-                        minEval = eval
-                        beta = eval
+                    if score < min_score:
+                        min_score = score
+                        beta = score
                         move = (i, j)
 
                     if alpha >= beta:
                         break
-        return minEval, move
+        return min_score, move
