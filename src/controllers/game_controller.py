@@ -10,7 +10,7 @@ PLAYER_ONE_COLOR=(255,255,255)
 PLAYER_TWO_COLOR=(0,0,0)
 
 def initialize(width, height, board_size, bg_color, line_color, line_width):
-    ai = AI(True)
+    ai = AI(False, False)
     ai_enabled=True
     player_turn=True
     is_player_one=True
@@ -53,6 +53,8 @@ def initialize(width, height, board_size, bg_color, line_color, line_width):
                             painter.draw_figures_on_board(board, space_between_columns, space_between_lines, (0,0,0), (255,255,255))
                             is_player_one = not is_player_one
                             player_turn = not player_turn
+                            #print(pos)
+                            #print("Changed")
                 else:
                     #since is_player_one status has already changed
                     if not is_player_one:
@@ -84,8 +86,8 @@ def initialize(width, height, board_size, bg_color, line_color, line_width):
                 if event.key == pg.K_r:
                     painter.initialize_board_screen(bg_color, board_size, space_between_columns, space_between_lines)
                     board.clear()
-                    is_player_one = True
+                    #is_player_one = not is_player_one
                     game_over=False
                     pos=(-1,-1)
-                    player_turn=True
+                    #player_turn= not player_turn
                     win_condition=0
